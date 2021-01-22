@@ -1,19 +1,26 @@
 <template>
-  <ul class="sidenav app-sidenav open sidebar">
-    <li v-for="(link, i) in sidenav" :key="i">
-      <router-link :to="link.path" class="waves-effect waves-orange pointer active">
+  <ul class="sidenav app-sidenav" :class="{ open: value }">
+    <router-link
+      tag="li"
+      v-for="(link, i) in sidenav" :key="i"
+      :to="link.path"
+      active-class="active"
+      :exact="link.exact"
+    >
+      <a href="#" class="waves-effect waves-orange pointer active">
         {{ link.title }}
-      </router-link>
-    </li>
+      </a>
+    </router-link>
   </ul>
 </template>
 
 <script>
 export default {
   name: 'Sidenav',
+  props: ['value'],
   data: () => ({
     sidenav: [
-      { path: '/', title: 'Account' },
+      { path: '/', title: 'Account', exact: true },
       { path: '/history', title: 'History' },
       { path: '/planning', title: 'Planning' },
       { path: '/record', title: 'New Record' },
@@ -24,8 +31,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sidebar {
-  background-color: rgba(221, 221, 221, 0.315);
-  transform: translate(0%);
-}
 </style>

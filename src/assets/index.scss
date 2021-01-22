@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.helper-text
+.helper-text,
 .invalid {
   color: #f44336;
 }
@@ -45,8 +45,7 @@
   height: auto !important;
 }
 
-.app-sidenav
-.open {
+.app-sidenav.open {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
@@ -88,8 +87,7 @@
   position: relative;
 }
 
-.app-content
-.full {
+.app-content.full {
   padding-left: 0;
 }
 

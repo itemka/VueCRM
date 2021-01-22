@@ -1,8 +1,8 @@
 <template>
   <div class="app-main-layout">
-    <Nav />
-    <Sidenav />
-    <main class="app-content">
+    <Nav v-on:click-navbar-menu="handleClickNavbarMenu" />
+    <Sidenav v-model="isOpen" />
+    <main class="app-content" :class="{ full: !isOpen }">
       <div class="app-page">
         <router-view />
       </div>
@@ -17,7 +17,16 @@ import Sidenav from '../components/Sidenav.vue'
 import BottomButton from '../components/BottomButton.vue'
 
 export default {
-  name: 'MainLayout',
+  name: 'main-layout',
+  data: () => ({
+    isOpen: true
+  }),
+  methods: {
+    handleClickNavbarMenu() {
+      this.isOpen = !this.isOpen
+      console.log(this.isOpen)
+    }
+  },
   components: {
     Nav,
     Sidenav,

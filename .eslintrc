@@ -1,14 +1,22 @@
 {
   "root": true,
   "env": {
+    "browser": true,
+    "es6": true,
     "node": true
   },
   "extends": [
-    "plugin:vue/essential",
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:vue/essential"
   ],
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ecmaVersion": 6
   },
-  "rules": {}
+  "plugins": [
+    "vue"
+  ],
+  "rules": {
+    "no-console": 1
+  }
 }
