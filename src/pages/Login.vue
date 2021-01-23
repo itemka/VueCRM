@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 import messages from '@/utils/messages'
 
@@ -86,21 +87,25 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
+    ...mapActions(['login']),
+    async handleSubmit() {
+      try {
+        if (this.$v.$invalid) {
+          this.$v.$touch()
 
-        return
+          return
+        }
+
+        const formData = {
+          email: this.email,
+          password: this.password
+        }
+
+        await this.login(formData)
+        this.$router.push('/')
+      } catch (error) {
+        console.log(error)
       }
-
-      const formData = {
-        email: this.email,
-        password: this.password
-      }
-      
-      console.log(formData)
-
-      this.$router.push('/')
     }
   }
 }

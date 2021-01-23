@@ -18,7 +18,6 @@
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
           </a>
-
           <ul id='dropdown' class='dropdown-content'>
             <li>
               <router-link to="/profile" class="black-text">

@@ -1,4 +1,4 @@
-export const dateFilter = (value, format = 'date') => {
+export default function dateFilter(value, format = 'date') {
   const options = {}
 
   if (format.includes('date')) {

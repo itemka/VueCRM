@@ -6,14 +6,17 @@
   "scripts": {
     "serve": "NODE_ENV=development vue-cli-service serve",
     "build": "NODE_ENV=production vue-cli-service build",
-    "start": "node server.js",
+    "start": "node -r esm server.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "compression": "^1.7.4",
     "core-js": "^3.8.3",
     "dotenv": "^8.2.0",
+    "es6-promise": "^4.2.8",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
+    "firebase": "^8.2.4",
     "materialize-css": "^1.0.0-rc.2",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9",
@@ -26,6 +29,7 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^5.0.0",
