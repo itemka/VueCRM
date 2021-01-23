@@ -3,12 +3,6 @@ import { connectToFirebase } from '@/utils/helper'
 const firebase = connectToFirebase(process.env)
 
 export default {
-  state: {
-    
-  },
-  mutations: {
-
-  },
   actions: {
     async login({ commit }, { email, password }) {
       try {
@@ -21,6 +15,7 @@ export default {
     async logout({ commit }) {
       try {
         await firebase.logout()
+        commit('clearInfo')
       } catch (error) {
         commit('setError', error)
         throw error
@@ -34,8 +29,5 @@ export default {
         throw error
       }
     }
-  },
-  getters: {
-
   }
 }

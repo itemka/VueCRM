@@ -87,4 +87,14 @@ export default class FirebaseClient {
       throw error
     }
   }
+
+  fetchUsedInfo = async () => {
+    try {
+      const uid = await this.getUserId()
+      
+      return (await firebase.database().ref(`/users/${uid}/info`).once('value')).val()
+    } catch (error) {
+      throw error
+    }
+  }
 }

@@ -15,7 +15,7 @@
             data-target="dropdown"
             ref="dropdownRef"
           >
-            USER NAME
+            {{ userInfo.name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
           <ul id='dropdown' class='dropdown-content'>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import M from 'materialize-css'
 
 export default {
@@ -64,6 +65,9 @@ export default {
     if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy()
     }
+  },
+  computed: {
+    ...mapGetters({ userInfo: 'info' }),
   },
   methods: {
     async logout() {
