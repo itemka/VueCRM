@@ -31,7 +31,7 @@
                 class="black-text"
                 v-on:click.prevent="logout"
               >
-                <i class="material-icons">assignment_return</i>Sign out
+                <i class="material-icons">assignment_return</i>Log out
               </a>
             </li>
           </ul>
@@ -66,8 +66,11 @@ export default {
     }
   },
   methods: {
-    logout() {
-      this.$router.push('/login?message=logout')
+    async logout() {
+      try {
+        await this.$store.dispatch('logout')
+        this.$router.push('/login?message=logout')
+      } catch (error) {}
     }
   }
 }

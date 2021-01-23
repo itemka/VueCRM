@@ -10,6 +10,20 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
+  state: {
+    error: null
+  },
+  mutations: {
+    setError(state, error) {
+      state.error = error
+    },
+    clearError(state) {
+      state.error = null
+    }
+  },
+  getters: {
+    getError: state => state.error
+  },
   modules: {
     auth,
     posts

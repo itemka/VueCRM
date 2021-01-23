@@ -103,9 +103,7 @@ export default {
 
         await this.login(formData)
         this.$router.push('/')
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     }
   }
 }

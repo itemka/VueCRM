@@ -17,6 +17,8 @@
     "vue"
   ],
   "rules": {
-    "no-console": 1
+    "no-console": 1,
+    "no-empty": 0,
+    "no-useless-catch": 0
   }
 }

@@ -36,7 +36,7 @@ export default class FirebaseClient {
       console.log('%c Firebase connected - done! ', 'background: green; color: #fffff');
       firebase.initializeApp(firebaseConfig)
     } else {
-      console.log('%c Firebase connected - already has done!! ', 'background: green; color: #fffff');
+      console.log('%c Firebase connected - already has done!!! ', 'background: green; color: #fffff');
     }
   }
 
@@ -44,11 +44,46 @@ export default class FirebaseClient {
     firebase.auth().onAuthStateChanged(callback)
   }
 
-  signIn = async ({ email, password }) => {
+  login = async ({ email, password }) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
     } catch (error) {
-      console.log(error)
+      throw error
+    }
+  }
+
+  logout = async () => {
+    try {
+      await firebase.auth().signOut()
+    } catch (error) {
+      throw error
+    }
+  }
+
+  getUserId = async () => {
+    try {
+      const user = await firebase.auth().currentUser
+
+      return user ? user.uid : null
+    } catch (error) {
+      throw error
+    }
+  }
+
+  register = async ({ email, password, name }) => {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password)
+      const uid = await this.getUserId()
+
+      if (uid) {
+        await firebase.database().ref(`/users/${uid}/info`).set({
+          bill: 1000,
+          name
+        })
+      } else {
+        throw new Error('User id is not found.')
+      }
+    } catch (error) {
       throw error
     }
   }

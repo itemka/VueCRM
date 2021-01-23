@@ -10,13 +10,27 @@ export default {
 
   },
   actions: {
-    async login(ctx, { email, password }) {
+    async login({ commit }, { email, password }) {
       try {
-        console.log("🚀 ~ file: auth.js ~ line 12 ~ login ~ email, password", email, password)
-        console.log("🚀 ~ file: auth.js ~ line 12 ~ login ~ ctx", ctx)
-        await firebase.signIn({ email, password })
+        await firebase.login({ email, password })
       } catch (error) {
-        console.log(error)
+        commit('setError', error)
+        throw error
+      }
+    },
+    async logout({ commit }) {
+      try {
+        await firebase.logout()
+      } catch (error) {
+        commit('setError', error)
+        throw error
+      }
+    },
+    async register({ commit }, { email, password, name }) {
+      try {        
+        await firebase.register({ email, password, name })
+      } catch (error) {
+        commit('setError', error)
         throw error
       }
     }

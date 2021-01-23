@@ -5,7 +5,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import messages from '@/utils/messages'
+
 export default {
-  name: 'empty-layout'
+  name: 'empty-layout',
+  computed: {
+    ...mapGetters(['getError'])
+  },
+  watch: {
+    getError(firebaseError) {
+      const { code = '', message = 'Something wrong' } = firebaseError;
+      this.$error(messages[code] || `${code} | ${message}`)
+    }
+  }
 }
 </script>

@@ -117,22 +117,23 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
+    async handleSubmit() {
+      try {
+        if (this.$v.$invalid) {
+          this.$v.$touch()
 
-        return
-      }
+          return
+        }
 
-      const formData = {
-        email: this.email,
-        password: this.password,
-        name: this.name
-      }
-      
-      console.log(formData)
-
-      this.$router.push('/')
+        const formData = {
+          email: this.email,
+          password: this.password,
+          name: this.name
+        }
+        
+        await this.$store.dispatch('register', formData)
+        this.$router.push('/')
+      } catch (error) {}
     }
   }
 }
