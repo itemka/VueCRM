@@ -19,7 +19,7 @@ import { mapGetters } from 'vuex'
 import Nav from '@/components/Nav.vue'
 import Sidenav from '@/components/Sidenav.vue'
 import BottomButton from '@/components/BottomButton.vue'
-import messages from '@/utils/messages'
+import { MESSAGES } from '@/utils/constants'
 
 export default {
   name: 'main-layout',
@@ -48,7 +48,7 @@ export default {
     getError(firebaseError) {
       const { code = '', message = 'Something wrong' } = firebaseError;
 
-      this.$error(messages[code] || `${code} | ${message}`)
+      this.$error(MESSAGES[code] || `${code} | ${message}`)
     }
   },
   components: {

@@ -6,7 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import messages from '@/utils/messages'
+import { MESSAGES } from '@/utils/constants'
 
 export default {
   name: 'empty-layout',
@@ -17,7 +17,7 @@ export default {
     getError(firebaseError) {
       const { code = '', message = 'Something wrong' } = firebaseError;
       
-      this.$error(messages[code] || `${code} | ${message}`)
+      this.$error(MESSAGES[code] || `${code} | ${message}`)
     }
   }
 }

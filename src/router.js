@@ -94,15 +94,7 @@ const router = new Router({
         layout: 'empty',
       },
       component: () => import('./pages/PageNotFound.vue')
-    },
-    {
-      path: '/posts',
-      name: 'posts',
-      meta: {
-        layout: 'main'
-      },
-      component: () => import('./pages/Posts.vue')
-    },
+    }
   ]
 })
 

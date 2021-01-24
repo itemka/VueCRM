@@ -6,7 +6,6 @@ import auth from './auth'
 import info from './info'
 import category from './category'
 import record from './record'
-import posts from './posts'
 import 'es6-promise/auto'
 
 Vue.use(Vuex)
@@ -19,8 +18,7 @@ export default new Vuex.Store({
     auth,
     info,
     category,
-    record,
-    posts
+    record
   },
   strict: debug,
   plugins: debug ? [ createLogger() ] : [],

@@ -61,7 +61,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { email, required, minLength } from 'vuelidate/lib/validators'
-import messages from '@/utils/messages'
+import { MESSAGES } from '@/utils/constants'
 
 export default {
   name: 'Login',
@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    const queryMesssages = messages[this.$route.query.message]
+    const queryMesssages = MESSAGES[this.$route.query.message]
 
     if (queryMesssages) {
       this.$message(queryMesssages)
