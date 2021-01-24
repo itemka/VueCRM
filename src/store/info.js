@@ -16,7 +16,11 @@ export default {
     async fetchInfo({ commit, dispatch }) {
       try {
         const uid = await dispatch('getUserId')
-        const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val() || {}
+        const info = (await firebase
+          .database()
+          .ref(`/users/${uid}/info`)
+          .once('value'))
+          .val() || {}
 
         commit('setInfo', info)
       } catch (error) {
@@ -29,7 +33,10 @@ export default {
         const uid = await dispatch('getUserId')
         const updatedData = { ...getters.info, ...toUpdate }
 
-        await firebase.database().ref(`/users/${uid}/info`).update(updatedData)
+        await firebase
+          .database()
+          .ref(`/users/${uid}/info`)
+          .update(updatedData)
 
         commit('setInfo', updatedData)
       } catch (error) {

@@ -13,9 +13,11 @@ export default {
   actions: {
     async fetchCurrency({ commit }) {
       try {
-        const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-        const url = `${proxyurl}http://data.fixer.io/api/latest?access_key=${process.env.VUE_APP_FIXER_ACCESS_KEY}&symbols=USD,EUR,BYN`
-        const currency = await fetch(url)
+        const currency = await fetch(`${
+          process.env.VUE_APP_PROXY_URL
+        }http://data.fixer.io/api/latest?access_key=${
+          process.env.VUE_APP_FIXER_ACCESS_KEY
+        }&symbols=USD,EUR,BYN`)
         
         return await currency.json()
       } catch (error) {

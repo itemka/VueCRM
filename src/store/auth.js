@@ -12,7 +12,9 @@ export default {
   actions: {
     async login({ commit }, { email, password }) {
       try {
-        await firebase.auth().signInWithEmailAndPassword(email, password)
+        await firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
       } catch (error) {
         commit('setError', error)
         throw error
@@ -20,7 +22,10 @@ export default {
     },
     async logout({ commit }) {
       try {
-        await firebase.auth().signOut()
+        await firebase
+          .auth()
+          .signOut()
+
         commit('clearInfo')
       } catch (error) {
         commit('setError', error)
@@ -29,7 +34,8 @@ export default {
     },
     async getUserId({ commit }) {
       try {
-        const { uid = null } = await firebase.auth().currentUser
+        const { uid = null } = await firebase
+          .auth().currentUser
 
         commit('setCurrentUserId', uid)
 
@@ -41,14 +47,16 @@ export default {
     },
     async register({ commit, dispatch }, { email, password, name }) {
       try {
-        await firebase.auth().createUserWithEmailAndPassword(email, password)
+        await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
 
         const uid = await dispatch('getUserId')
 
-        await firebase.database().ref(`/users/${uid}/info`).set({
-          bill: 1000,
-          name
-        })
+        await firebase
+          .database()
+          .ref(`/users/${uid}/info`)
+          .set({ bill: 1000, name})
       } catch (error) {
         commit('setError', error)
         throw error
