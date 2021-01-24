@@ -4,7 +4,7 @@
       <h3>Record history</h3>
     </div>
     <div class="history-chart">
-      <canvas></canvas>
+      <canvas ref="canvas"></canvas>
     </div>
     <section>
       <Loader v-if="loading" />
@@ -30,11 +30,14 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { Pie } from 'vue-chartjs'
 import HistoryTable from '@/components/HistoryTable.vue'
 import paginationMixin from '@/mixins/pagination.mixin'
+import { getRandomColors } from '@/utils/helper'
 
 export default {
   name: 'History',
+  extends: Pie,
   mixins: [paginationMixin],
   data: () => ({
     loading: true,
@@ -44,13 +47,8 @@ export default {
     HistoryTable
   },
   methods: {
-    ...mapActions(['fetchCategories', 'fetchRecords'])
-  },
-  async mounted() {
-    try {
-      const categories = await this.fetchCategories()
-      this.records = await this.fetchRecords()
-
+    ...mapActions(['fetchCategories', 'fetchRecords']),
+    setup(categories) {
       this.setupPagination(
         this.records.map(record => ({
           ...record,
@@ -61,6 +59,43 @@ export default {
           )
         }))
       )
+
+      const { backgroundColor = [], borderColor = [] } = getRandomColors(categories)
+
+      this.renderChart({
+        labels: categories.map(({ title }) => title),
+        datasets: [{
+          label: 'Costs by category',
+          data: categories.map(category => {
+            return this.records.reduce((acc, record) => {
+              if (record.categoryId === category.id && record.type === 'outcome') {
+                acc += +record.amount
+              }
+
+              return acc
+            }, 0)
+          }),
+          backgroundColor,
+          borderColor,
+          borderWidth: 1
+        }]
+      }, {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      })
+    }
+  },
+  async mounted() {
+    try {
+      const categories = await this.fetchCategories()
+      this.records = await this.fetchRecords()
+
+      this.setup(categories)
 
       this.loading = false
     } catch (error) {}

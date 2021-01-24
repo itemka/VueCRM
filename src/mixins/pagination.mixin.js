@@ -4,7 +4,7 @@ import size from 'lodash/size'
 export default {
   data: () => ({
     page: 1,
-    pageSize: 5,
+    pageSize: 3,
     pageCount: 0,
     allItems: [],
     items: []
