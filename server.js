@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import path from 'path'
+import cors from 'cors'
 import compression from 'compression'
 
 dotenv.config('./env')
@@ -11,6 +12,7 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(compression())
+app.use(cors())
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))

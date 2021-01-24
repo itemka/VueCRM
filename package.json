@@ -12,6 +12,7 @@
   "dependencies": {
     "compression": "^1.7.4",
     "core-js": "^3.8.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "es6-promise": "^4.2.8",
     "esm": "^3.2.25",
