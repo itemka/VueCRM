@@ -4,9 +4,17 @@
       <h3>Categories</h3>
     </div>
     <section>
-      <div class="row">
+      <Loader v-if="loading" />
+      <div v-else class="row">
         <CategoryCreate v-on:created="addNewCategory" />
-        <CategoryEdit />
+        <CategoryEdit
+          :categories="categories"
+          v-on:updated="updateCategory"
+          :key="categories.length + updateCount"
+          :choosedCategoryIdx="choosedCategoryIdx"
+          v-if="categories.length"
+        />
+        <p v-else class="center">Categories are empty</p>
       </div>
     </section>
   </div>
@@ -19,15 +27,32 @@ import CategoryEdit from '../components/CategoryEdit.vue'
 export default {
   name: 'Categories',
   data: () => ({
-    categories: []
+    categories: [],
+    loading: true,
+    updateCount: 0,
+    choosedCategoryIdx: 0
   }),
+  async mounted() {
+    try {
+      this.categories = await this.$store.dispatch('fetchCategories')
+      this.loading = false
+    } catch (error) {}
+  },
   components: {
     CategoryCreate,
     CategoryEdit
   },
   methods: {
-    addNewCategory(category) {
-      this.categories.push(category)
+    addNewCategory(newCategory) {
+      this.categories.push(newCategory)
+    },
+    updateCategory(updatedCategory) {
+      const idx = this.categories.findIndex(({ id }) => id === updatedCategory.id)
+
+      this.categories[idx].title = updatedCategory.title
+      this.categories[idx].limit = updatedCategory.limit
+      this.choosedCategoryIdx = idx
+      this.updateCount++
     }
   }
 }
