@@ -5,6 +5,7 @@ import common from './common'
 import auth from './auth'
 import info from './info'
 import category from './category'
+import record from './record'
 import posts from './posts'
 import 'es6-promise/auto'
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     auth,
     info,
     category,
+    record,
     posts
   },
   strict: debug,

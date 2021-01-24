@@ -23,6 +23,19 @@ export default {
         commit('setError')
         throw error
       }
+    },
+    async updateInfo({ commit, dispatch, getters }, toUpdate) {
+      try {
+        const uid = await dispatch('getUserId')
+        const updatedData = { ...getters.info, ...toUpdate }
+
+        await firebase.database().ref(`/users/${uid}/info`).update(updatedData)
+
+        commit('setInfo', updatedData)
+      } catch (error) {
+        commit('setError')
+        throw error
+      }
     }
   },
   getters: {
