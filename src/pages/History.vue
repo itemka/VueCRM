@@ -14,7 +14,16 @@
       >
         Records are empty <router-link to="/record">Add new record</router-link>
       </p>
-      <HistoryTable v-else :records="records" />
+      <HistoryTable v-else :records="items" />
+      <Paginate
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="handlePageChange"
+        :prev-text="'Prev'"
+        :next-text="'Next'"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+      />
     </section>
   </div>
 </template>
@@ -22,12 +31,13 @@
 <script>
 import { mapActions } from 'vuex'
 import HistoryTable from '@/components/HistoryTable.vue'
+import paginationMixin from '@/mixins/pagination.mixin'
 
 export default {
   name: 'History',
+  mixins: [paginationMixin],
   data: () => ({
     loading: true,
-    categories: [],
     records: []
   }),
   components: {
@@ -38,15 +48,19 @@ export default {
   },
   async mounted() {
     try {
-      this.categories = await this.fetchCategories()
-      this.records = (await this.fetchRecords()).map(record => ({
-        ...record,
-        categoryName: this.categories.find(({ id }) => id === record.categoryId).title,
-        ...(record.type === 'income'
-          ? { typeClass: 'green', typeText: 'Income' }
-          : { typeClass: 'red', typeText: 'Outcome' }
-        )
-      }))
+      const categories = await this.fetchCategories()
+      this.records = await this.fetchRecords()
+
+      this.setupPagination(
+        this.records.map(record => ({
+          ...record,
+          categoryName: categories.find(({ id }) => id === record.categoryId).title,
+          ...(record.type === 'income'
+            ? { typeClass: 'green', typeText: 'Income' }
+            : { typeClass: 'red', typeText: 'Outcome' }
+          )
+        }))
+      )
 
       this.loading = false
     } catch (error) {}

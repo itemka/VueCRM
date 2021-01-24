@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 import firebase from 'firebase/app'
+import Paginate from 'vuejs-paginate'
 import App from '@/App.vue'
 import Loader from '@/components/Loader.vue'
 import router from '@/router'
@@ -23,6 +24,7 @@ Vue.filter('date', dateFilter)
 Vue.filter('currency', currencyFilter)
 Vue.directive('tooltip', tooltipDirective)
 Vue.component('Loader', Loader)
+Vue.component('Paginate', Paginate)
 
 if (!firebase.apps.length) {
   firebase.initializeApp({ ...getEnvVariables(process.env, FIREBASE_KEY_NAMES) })
