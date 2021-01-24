@@ -1,7 +1,4 @@
-import FirebaseClient from './firebase'
-import { FIREBASE_KEY_NAMES } from './constants'
-
-const getEnvVariables = (envVariables, keyNames = {}) => {
+export const getEnvVariables = (envVariables, keyNames = {}) => {
   if (!envVariables) {
     return {}
   }
@@ -12,7 +9,3 @@ const getEnvVariables = (envVariables, keyNames = {}) => {
     return acc
   }, {})
 }
-
-export const connectToFirebase = (envVariables) => new FirebaseClient({
-  ...getEnvVariables(envVariables, FIREBASE_KEY_NAMES)
-})

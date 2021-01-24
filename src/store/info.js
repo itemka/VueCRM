@@ -1,6 +1,4 @@
-import { connectToFirebase } from '@/utils/helper'
-
-const firebase = connectToFirebase(process.env)
+import firebase from 'firebase/app'
 
 export default {
   state: {
@@ -15,9 +13,10 @@ export default {
     }
   },
   actions: {
-    async fetchInfo({ commit }) {
+    async fetchInfo({ commit, dispatch }) {
       try {
-        const info = await firebase.fetchUsedInfo()
+        const uid = await dispatch('getUserId')
+        const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val()
 
         commit('setInfo', info)
       } catch (error) {

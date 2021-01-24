@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loader v-if="loading" />
+    <Loader v-if="loading" />
     <div v-else class="app-main-layout">
       <Nav v-on:click-navbar-menu="handleClickNavbarMenu" />
       <Sidenav v-model="isOpen" />
@@ -23,8 +23,7 @@ export default {
   name: 'main-layout',
   data: () => ({
     isOpen: true,
-    // loading: true
-    loading: false
+    loading: true
   }),
   async mounted() {
     try {
@@ -32,13 +31,12 @@ export default {
         await this.$store.dispatch('fetchInfo')
       }
 
-      // this.loading = false
+      this.loading = false
     } catch (error) {}
   },
   methods: {
     handleClickNavbarMenu() {
       this.isOpen = !this.isOpen
-      console.log(this.isOpen)
     }
   },
   components: {
