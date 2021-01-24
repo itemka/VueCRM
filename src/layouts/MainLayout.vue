@@ -23,7 +23,8 @@ export default {
   name: 'main-layout',
   data: () => ({
     isOpen: true,
-    loading: true
+    // loading: true
+    loading: false
   }),
   async mounted() {
     try {
@@ -31,7 +32,7 @@ export default {
         await this.$store.dispatch('fetchInfo')
       }
 
-      this.loading = false
+      // this.loading = false
     } catch (error) {}
   },
   methods: {

@@ -4,6 +4,7 @@ import createLogger from 'vuex/dist/logger'
 import common from './common'
 import auth from './auth'
 import info from './info'
+import category from './category'
 import posts from './posts'
 import 'es6-promise/auto'
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     common,
     auth,
     info,
+    category,
     posts
   },
   strict: debug,
