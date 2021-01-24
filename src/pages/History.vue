@@ -7,34 +7,49 @@
       <canvas></canvas>
     </div>
     <section>
-      <table>
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Amount</th>
-          <th>Date</th>
-          <th>Category</th>
-          <th>Type</th>
-          <th>Open</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>1</td>
-          <td>1212</td>
-          <td>12.12.32</td>
-          <td>name</td>
-          <td>
-            <span class="white-text badge red">Expense</span>
-          </td>
-          <td>
-            <button class="btn-small btn">
-              <i class="material-icons">open_in_new</i>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <Loader v-if="loading" />
+      <p
+        v-else-if="!records.length"
+        class="center"
+      >
+        Records are empty <router-link to="/record">Add new record</router-link>
+      </p>
+      <HistoryTable v-else :records="records" />
     </section>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+import HistoryTable from '@/components/HistoryTable.vue'
+
+export default {
+  name: 'History',
+  data: () => ({
+    loading: true,
+    categories: [],
+    records: []
+  }),
+  components: {
+    HistoryTable
+  },
+  methods: {
+    ...mapActions(['fetchCategories', 'fetchRecords'])
+  },
+  async mounted() {
+    try {
+      this.categories = await this.fetchCategories()
+      this.records = (await this.fetchRecords()).map(record => ({
+        ...record,
+        categoryName: this.categories.find(({ id }) => id === record.categoryId).title,
+        ...(record.type === 'income'
+          ? { typeClass: 'green', typeText: 'Income' }
+          : { typeClass: 'red', typeText: 'Outcome' }
+        )
+      }))
+
+      this.loading = false
+    } catch (error) {}
+  }
+}
+</script>
