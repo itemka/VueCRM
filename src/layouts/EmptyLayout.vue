@@ -16,6 +16,7 @@ export default {
   watch: {
     getError(firebaseError) {
       const { code = '', message = 'Something wrong' } = firebaseError;
+      
       this.$error(messages[code] || `${code} | ${message}`)
     }
   }

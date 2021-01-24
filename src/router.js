@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import firebase from 'firebase/app'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -27,7 +28,8 @@ export default new Router({
       path: '/',
       name: 'home',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/Home.vue')
     },
@@ -35,7 +37,8 @@ export default new Router({
       path: '/categories',
       name: 'categories',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/Categories.vue')
     },
@@ -43,7 +46,8 @@ export default new Router({
       path: '/detail/:id',
       name: 'detail',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/Detail.vue')
     },
@@ -51,7 +55,8 @@ export default new Router({
       path: '/history',
       name: 'history',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/History.vue')
     },
@@ -59,7 +64,8 @@ export default new Router({
       path: '/planning',
       name: 'planning',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/Planning.vue')
     },
@@ -67,7 +73,8 @@ export default new Router({
       path: '/record',
       name: 'record',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/Record.vue')
     },
@@ -75,7 +82,8 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        layout: 'main'
+        layout: 'main',
+        auth: true
       },
       component: () => import('./pages/Profile.vue')
     },
@@ -83,7 +91,7 @@ export default new Router({
       path: '*',
       name: 'page-not-found',
       meta: {
-        layout: 'empty'
+        layout: 'empty',
       },
       component: () => import('./pages/PageNotFound.vue')
     },
@@ -97,3 +105,16 @@ export default new Router({
     },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser
+  const requireAuth = to.matched.some(record => record.meta.auth)
+
+  if (requireAuth && !currentUser) {
+    next('/login?message=login')
+  } else {
+    next()
+  }
+})
+
+export default router

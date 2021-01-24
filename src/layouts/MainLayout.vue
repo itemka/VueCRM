@@ -15,16 +15,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Nav from '@/components/Nav.vue'
-import Sidenav from '../components/Sidenav.vue'
-import BottomButton from '../components/BottomButton.vue'
+import Sidenav from '@/components/Sidenav.vue'
+import BottomButton from '@/components/BottomButton.vue'
+import messages from '@/utils/messages'
 
 export default {
   name: 'main-layout',
   data: () => ({
     isOpen: true,
-    // loading: true
-    loading: false
+    loading: true
   }),
   async mounted() {
     try {
@@ -32,12 +33,22 @@ export default {
         await this.$store.dispatch('fetchInfo')
       }
 
-      // this.loading = false
+      this.loading = false
     } catch (error) {}
   },
   methods: {
     handleClickNavbarMenu() {
       this.isOpen = !this.isOpen
+    }
+  },
+  computed: {
+    ...mapGetters(['getError'])
+  },
+  watch: {
+    getError(firebaseError) {
+      const { code = '', message = 'Something wrong' } = firebaseError;
+
+      this.$error(messages[code] || `${code} | ${message}`)
     }
   },
   components: {
