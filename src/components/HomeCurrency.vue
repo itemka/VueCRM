@@ -14,9 +14,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="carrency in currencies" :key="carrency">
-            <td>{{ carrency }}</td>
-            <td>{{ getCurrency(carrency).toFixed(5) }}</td>
+          <tr
+            v-for="currency in currencies"
+            :key="currency"
+          >
+            <td>{{ currency }}</td>
+            <td>{{ getCurrency(currency) | currency(currency) }}</td>
             <td>{{ date | date }}</td>
           </tr>
           </tbody>
@@ -39,7 +42,7 @@ export default {
   },
   methods: {
     getCurrency(currency) {
-      return Math.floor(this.base * this.rates[currency])
+      return this.base * this.rates[currency]
     }
   }
 }
