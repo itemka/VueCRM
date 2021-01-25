@@ -1,12 +1,16 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Planning</h3>
+      <h3>{{ 'Title_Planning' | localize }}</h3>
       <h4>{{ info.bill | currency }}</h4>
     </div>
     <Loader v-if="loading" />
     <p v-else-if="!categories.length" class="center">
-      Categories are empty <router-link to="/categories">Add new category</router-link>
+      {{
+        'Message_CategoriesAreEmpty' | localize
+      }} <router-link to="/categories">{{
+        'Message_AddNewCategory' | localize
+      }}</router-link>
     </p>
     <section v-else>
       <div
@@ -61,8 +65,10 @@ export default {
             ? 'yellow'
             : 'red'
         const tooltipValue = category.limit - spend
-        const tooltip = `${tooltipValue < 0 ? 'Excess by' : 'Left'} ${currencyFilter(Math.abs(tooltipValue))}`
-
+        const tooltip = `${
+          tooltipValue < 0 ? 'Message_ExcessBy' : 'Message_Leftover'
+        } ${currencyFilter(Math.abs(tooltipValue))}`
+        
         return {
           ...category,
           progressPercent,

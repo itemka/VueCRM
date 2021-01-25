@@ -1,11 +1,15 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>New Record</h3>
+      <h3>{{ 'Title_NewRecord' | localize }}</h3>
     </div>
     <Loader v-if="loading" />
     <p v-else-if="!categories.length" class="center">
-      Categories are empty <router-link to="/categories">Add new category</router-link>
+      {{
+        'Message_CategoriesAreEmpty' | localize
+      }} <router-link to="/categories">{{
+        'Message_AddNewCategory' | localize
+      }}</router-link>
     </p>
     <form
       v-else
@@ -22,7 +26,7 @@
             {{ category.title }}
           </option>
         </select>
-        <label>Choose category</label>
+        <label>{{ 'Message_ChooseCategory' | localize }}</label>
       </div>
       <p>
         <label>
@@ -33,7 +37,7 @@
             value="income"
             v-model="type"
           />
-          <span>Income</span>
+          <span>{{ 'Income' | localize }}</span>
         </label>
       </p>
       <p>
@@ -45,7 +49,7 @@
             value="outcome"
             v-model="type"
           />
-          <span>Outcome</span>
+          <span>{{ 'Outcome' | localize }}</span>
         </label>
       </p>
       <div class="input-field">
@@ -55,12 +59,12 @@
           v-model.number="amount"
           :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
         >
-        <label for="amount">Amount</label>
+        <label for="amount">{{ 'Amount' | localize }}</label>
         <span
           class="helper-text invalid"
           v-if="$v.amount.$dirty && !$v.amount.minValue"
         >
-          Min value {{ $v.amount.$params.minValue.min }}
+          {{ 'Message_MinValue' | localize }} {{ $v.amount.$params.minValue.min }}
         </span>
       </div>
       <div class="input-field">
@@ -70,16 +74,16 @@
           v-model.trim="description"
           :class="{ invalid: $v.description.$dirty && !$v.description.required }"
         >
-        <label for="description">Description</label>
+        <label for="description">{{ 'Description' | localize }}</label>
         <span
           class="helper-text invalid"
           v-if="$v.description.$dirty && !$v.description.required"
         >
-          Enter description
+          {{ 'Message_EnterDescription' | localize }}
         </span>
       </div>
       <button class="btn waves-effect waves-light" type="submit">
-        Create <i class="material-icons right">send</i>
+        {{ 'Create' | localize }} <i class="material-icons right">send</i>
       </button>
     </form>
   </div>
@@ -164,12 +168,13 @@ export default {
               : this.info.bill - this.amount
           })
 
-          this.$message('Record created')
+          this.$message('Message_RecordCreated')
           this.amount = 1
           this.description = ''
           this.$v.reset()
         } else {
-          this.$message(`Insufficient funds in the account (${this.amount - this.info.bill})`)
+          this.$message('Message_InsufficientFundsInTheAccount')
+          this.$message(`(${this.amount - this.info.bill})`)
         }
       } catch (error) {}
     }

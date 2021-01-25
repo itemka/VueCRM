@@ -1,3 +1,6 @@
+import en from '@/locales/en.json'
+import ru from '@/locales/ru.json'
+
 export const FIREBASE_KEY_NAMES = {
   apiKey: 'VUE_APP_FIREBASE_API_KEY',
   authDomain: 'VUE_APP_FIREBASE_AUTH_DOMAIN',
@@ -8,9 +11,14 @@ export const FIREBASE_KEY_NAMES = {
 }
 
 export const MESSAGES = {
-  'logout': 'You are logged out!',
-  'login': 'First, sign in!',
-  'auth/user-not-found': 'User not found',
-  'auth/wrong-password': 'Invalid password',
-  'auth/email-already-in-use': 'Email already in use'
+  'logout': 'ServerCodeMessage_YouAreLoggedOut',
+  'login': 'ServerCodeMessage_FirstSignIn',
+  'auth/user-not-found': 'ServerCodeMessage_UserNotFound',
+  'auth/wrong-password': 'ServerCodeMessage_InvalidPassword',
+  'auth/email-already-in-use': 'ServerCodeMessage_EmailAlreadyInUse'
+}
+
+export const LOCALES = {
+  'en-US': en,
+  'ru-RU': ru
 }

@@ -3,11 +3,11 @@
     <thead>
     <tr>
       <th>#</th>
-      <th>Amount</th>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Type</th>
-      <th>Open</th>
+      <th>{{ 'Amount' | localize }}</th>
+      <th>{{ 'Date' | localize }}</th>
+      <th>{{ 'Category' | localize }}</th>
+      <th>{{ 'Type' | localize }}</th>
+      <th>{{ 'Open' | localize }}</th>
     </tr>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
         <button
           class="btn-small btn"
           v-on:click="$router.push(`/detail/${record.id}`)"
-          v-tooltip="'Show record'"
+          v-tooltip="'Message_ShowRecord'"
         >
           <i class="material-icons">open_in_new</i>
         </button>

@@ -3,7 +3,7 @@
     <Loader v-if="loading" />
     <div v-else class="app-main-layout">
       <Nav v-on:click-navbar-menu="handleClickNavbarMenu" />
-      <Sidenav v-model="isOpen" />
+      <Sidenav v-model="isOpen" :key="locale" />
       <main class="app-content" :class="{ full: !isOpen }">
         <div class="app-page">
           <router-view />
@@ -42,7 +42,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getError'])
+    ...mapGetters(['getError']),
+    locale() {
+      return this.$store.getters.info.locale
+    }
   },
   watch: {
     getError(firebaseError) {

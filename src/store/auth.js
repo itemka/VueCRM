@@ -56,7 +56,11 @@ export default {
         await firebase
           .database()
           .ref(`/users/${uid}/info`)
-          .set({ bill: 1000, name})
+          .set({
+            bill: 1000,
+            name,
+            locale: 'en-US'
+          })
       } catch (error) {
         commit('setError', error)
         throw error

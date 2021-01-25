@@ -15,20 +15,19 @@
 </template>
 
 <script>
+import localizeFilter from '@/filters/localize.filter'
+
 export default {
   name: 'Sidenav',
   props: ['value'],
   data: () => ({
     sidenav: [
-      { path: '/', title: 'Account', exact: true },
-      { path: '/history', title: 'History' },
-      { path: '/planning', title: 'Planning' },
-      { path: '/record', title: 'New Record' },
-      { path: '/categories', title: 'Categories' },
+      { path: '/', title: localizeFilter('Menu_Account'), exact: true },
+      { path: '/history', title: localizeFilter('Menu_History') },
+      { path: '/planning', title: localizeFilter('Menu_Planning') },
+      { path: '/record', title: localizeFilter('Menu_NewRecord') },
+      { path: '/categories', title: localizeFilter('Menu_Categories') },
     ]
   })
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

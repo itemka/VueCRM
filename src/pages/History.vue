@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Record history</h3>
+      <h3>{{ 'Title_RecordHistory' | localize }}</h3>
     </div>
     <div class="history-chart">
       <canvas ref="canvas"></canvas>
@@ -12,15 +12,19 @@
         v-else-if="!records.length"
         class="center"
       >
-        Records are empty <router-link to="/record">Add new record</router-link>
+        {{
+          'Message_RecordsAreEmpty' | localize
+        }} <router-link to="/record">{{
+          'Message_AddNewRecord' | localize
+        }}</router-link>
       </p>
       <HistoryTable v-else :records="items" />
       <Paginate
         v-model="page"
         :page-count="pageCount"
         :click-handler="handlePageChange"
-        :prev-text="'Prev'"
-        :next-text="'Next'"
+        :prev-text="'Prev' | localize"
+        :next-text="'Next' | localize"
         :container-class="'pagination'"
         :page-class="'page-item'"
       />
@@ -33,6 +37,7 @@ import { mapActions } from 'vuex'
 import { Pie } from 'vue-chartjs'
 import HistoryTable from '@/components/HistoryTable.vue'
 import paginationMixin from '@/mixins/pagination.mixin'
+import localizeFilter from '@/filters/localize.filter'
 import { getRandomColors } from '@/utils/helper'
 
 export default {
@@ -54,8 +59,8 @@ export default {
           ...record,
           categoryName: categories.find(({ id }) => id === record.categoryId).title,
           ...(record.type === 'income'
-            ? { typeClass: 'green', typeText: 'Income' }
-            : { typeClass: 'red', typeText: 'Outcome' }
+            ? { typeClass: 'green', typeText: localizeFilter('Income') }
+            : { typeClass: 'red', typeText: localizeFilter('Outcome') }
           )
         }))
       )
@@ -65,7 +70,7 @@ export default {
       this.renderChart({
         labels: categories.map(({ title }) => title),
         datasets: [{
-          label: 'Costs by category',
+          label: localizeFilter('Tutle_Chart'),
           data: categories.map(category => {
             return this.records.reduce((acc, record) => {
               if (record.categoryId === category.id && record.type === 'outcome') {

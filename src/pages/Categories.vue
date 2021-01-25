@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Categories</h3>
+      <h3>{{ 'Categories' | localize }}</h3>
     </div>
     <section>
       <Loader v-if="loading" />
@@ -14,7 +14,7 @@
           :choosedCategoryIdx="choosedCategoryIdx"
           v-if="categories.length"
         />
-        <p v-else class="center">Categories are empty</p>
+        <p v-else class="center">{{ 'Message_CategoriesAreEmpty' | localize }}</p>
       </div>
     </section>
   </div>

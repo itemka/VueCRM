@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Account</h3>
-      <button class="btn waves-effect waves-light btn-small" v-on:click.prevent="refresh">
+      <h3>{{ 'Title_Account' | localize }}</h3>
+      <button
+        class="btn waves-effect waves-light btn-small"
+        v-on:click.prevent="refresh"
+      >
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -29,7 +32,8 @@ export default {
   }),
   async mounted() {
     try {
-      this.currency = await this.$store.dispatch('fetchCurrency')
+      // this.currency = await this.$store.dispatch('fetchCurrency')
+      this.currency = []
       this.loading = false
     } catch (error) {}
   },
@@ -48,6 +52,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-</style>

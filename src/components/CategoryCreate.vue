@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Create</h4>
+        <h4>{{ 'Create' | localize }}</h4>
       </div>
       <form v-on:submit.prevent="handleSubmit">
         <div class="input-field">
@@ -12,12 +12,12 @@
             v-model.trim="title"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           >
-          <label for="name">Name</label>
+          <label for="name">{{ 'Name' | localize }}</label>
           <span
             class="helper-text invalid"
             v-if="$v.title.$dirty && !$v.title.required"
           >
-            Enter category name
+            {{ 'Message_EnterCategoryName' | localize }}
           </span>
         </div>
         <div class="input-field">
@@ -27,16 +27,16 @@
             v-model.number="limit"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           >
-          <label for="limit">Limit</label>
+          <label for="limit">{{ 'Limit' | localize }}</label>
           <span
             class="helper-text invalid"
             v-if="$v.limit.$dirty && !$v.limit.minValue"
           >
-            Min value {{ $v.limit.$params.minValue.min }}
+            {{ 'Message_MinValue' | localize }} {{ $v.limit.$params.minValue.min }}
           </span>
         </div>
         <button class="btn waves-effect waves-light" type="submit">
-          Create <i class="material-icons right">send</i>
+          {{ 'Create' | localize }} <i class="material-icons right">send</i>
         </button>
       </form>
     </div>
@@ -81,7 +81,7 @@ export default {
         this.title = ''
         this.limit = 100
         this.$v.$reset()
-        this.$message('Category was created')
+        this.$message('Message_CategoryCreated')
         this.$emit('created', category)
       } catch (error) {}
     }

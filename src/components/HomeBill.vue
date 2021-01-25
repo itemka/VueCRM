@@ -2,7 +2,7 @@
   <div class="col s12 m6 l4">
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
-        <span class="card-title">USD account</span>
+        <span class="card-title">{{ 'Title_USDAccount' | localize }}</span>
         <p
           v-for="currency in currencies"
           :key="currency"
