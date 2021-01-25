@@ -42,6 +42,11 @@ import { getRandomColors } from '@/utils/helper'
 
 export default {
   name: 'History',
+  metaInfo() {
+    return {
+      title: this.$getMetaTitle('Menu_History')
+    }
+  },
   extends: Pie,
   mixins: [paginationMixin],
   data: () => ({

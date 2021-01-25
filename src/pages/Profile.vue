@@ -41,6 +41,11 @@ import M from 'materialize-css'
 
 export default {
   name: 'Profile',
+  metaInfo() {
+    return {
+      title: this.$getMetaTitle('Profile')
+    }
+  },
   data: () => ({
     name: '',
     isEnLocale: true

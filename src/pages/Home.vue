@@ -26,6 +26,11 @@ import HomeCurrency from '@/components/HomeCurrency.vue'
 
 export default {
   name: 'Home',
+  metaInfo() {
+    return {
+      title: this.$getMetaTitle('Menu_Account')
+    }
+  },
   data: () => ({
     loading: true,
     currency: null

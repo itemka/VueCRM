@@ -32,7 +32,6 @@
           class="btn-small btn"
           v-on:click="$router.push(`/detail/${record.id}`)"
           v-tooltip="tooltipMessage"
-          :key="locale"
         >
           <i class="material-icons">open_in_new</i>
         </button>

@@ -75,6 +75,11 @@ import { MESSAGES } from '@/utils/constants'
 
 export default {
   name: 'Login',
+  metaInfo() {
+    return {
+      title: this.$getMetaTitle('LogIn')
+    }
+  },
   data: () => ({
     email: '',
     password: ''

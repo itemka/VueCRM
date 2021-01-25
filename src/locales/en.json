@@ -75,5 +75,7 @@
   "Message_NameMustBeLong": "Name must be long",
   "Message_IAgreeWithTheRules": "I agree with the rules",
   "Message_AlreadyHaveAnAccount": "Already have an account",
-  "Message_CategoryUpdated": "Category updated"
+  "Message_CategoryUpdated": "Category updated",
+  "Title_Detail": "Detail",
+  "Title_PageNotFound": "404"
 }

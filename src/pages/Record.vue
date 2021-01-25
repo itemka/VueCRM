@@ -96,6 +96,11 @@ import M from 'materialize-css'
 
 export default {
   name: 'Record',
+  metaInfo() {
+    return {
+      title: this.$getMetaTitle('Menu_NewRecord')
+    }
+  },
   data: () => ({
     select: null,
     categories: [],

@@ -75,5 +75,7 @@
   "Message_NameMustBeLong": "Имя должно быть длинной",
   "Message_IAgreeWithTheRules": "Я согласен с правилами",
   "Message_AlreadyHaveAnAccount": "Уже есть учетная запись",
-  "Message_CategoryUpdated": "Категория обновлена"
+  "Message_CategoryUpdated": "Категория обновлена",
+  "Title_Detail": "Детали",
+  "Title_PageNotFound": "404"
 }
