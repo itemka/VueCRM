@@ -31,7 +31,8 @@
         <button
           class="btn-small btn"
           v-on:click="$router.push(`/detail/${record.id}`)"
-          v-tooltip="'Message_ShowRecord'"
+          v-tooltip="tooltipMessage"
+          :key="locale"
         >
           <i class="material-icons">open_in_new</i>
         </button>
@@ -42,11 +43,18 @@
 </template>
 
 <script>
+import localizeFilter from '@/filters/localize.filter'
+
 export default {
   props: {
     records: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    tooltipMessage() {
+      return localizeFilter('Message_ShowRecord')
     }
   }
 }

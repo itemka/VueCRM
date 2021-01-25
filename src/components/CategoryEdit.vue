@@ -24,7 +24,7 @@
             v-model.trim="title"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           >
-          <label for="name">{{ 'Namw' | localize }}</label>
+          <label for="name">{{ 'Name' | localize }}</label>
           <span
             class="helper-text invalid"
             v-if="$v.title.$dirty && !$v.title.required"
@@ -126,7 +126,7 @@ export default {
         }
 
         await this.$store.dispatch('updateCategory', formData)
-        this.$message('Category was updated')
+        this.$message('Message_CategoryUpdated')
         this.$emit('updated', formData)
       } catch (error) {}
     }

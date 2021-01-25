@@ -11,7 +11,7 @@
   "Menu_NewRecord": "Новая запись",
   "Menu_Categories": "Категории",
   "Message_ProfileInfoUpdated": "Информация профиля обновлена",
-  "Message_CreateNewRecord": "Новую запись создана",
+  "Message_CreateNewRecord": "Создать новую запись",
   "Create": "Создать",
   "Message_EnterCategoryName": "Введите название категории",
   "Limit": "Лимит",
@@ -74,5 +74,6 @@
   "Title_HomeBookkeeping": "Домашняя бухгалтерия",
   "Message_NameMustBeLong": "Имя должно быть длинной",
   "Message_IAgreeWithTheRules": "Я согласен с правилами",
-  "Message_AlreadyHaveAnAccount": "Уже есть учетная запись"
+  "Message_AlreadyHaveAnAccount": "Уже есть учетная запись",
+  "Message_CategoryUpdated": "Категория обновлена"
 }

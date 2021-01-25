@@ -90,7 +90,7 @@
         </button>
       </div>
       <p class="center">
-        {{ 'Message_AlreadyHaveAnAccount' }}? <router-link to="/">{{
+        {{ 'Message_AlreadyHaveAnAccount' | localize }}? <router-link to="/">{{
           'LogIn' | localize
         }}!</router-link>
       </p>

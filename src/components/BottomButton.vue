@@ -2,9 +2,9 @@
   <div class="fixed-action-btn">
     <router-link
       to="/record"
-      v-tooltip="'Message_CreateNewRecord'"
+      v-tooltip="tooltipMessage"
       class="btn-floating btn-large blue"
-      :key="locale"
+      :key="tooltipMessage"
     >
       <i class="large material-icons">add</i>
     </router-link>
@@ -12,10 +12,12 @@
 </template>
 
 <script>
+import localizeFilter from '@/filters/localize.filter'
+
 export default {
   computed: {
-    locale() {
-      return this.$store.getters.info.locale
+    tooltipMessage() {
+      return localizeFilter('Message_CreateNewRecord')
     }
   }
 }

@@ -74,5 +74,6 @@
   "Title_HomeBookkeeping": "Home bookkeeping",
   "Message_NameMustBeLong": "Name must be long",
   "Message_IAgreeWithTheRules": "I agree with the rules",
-  "Message_AlreadyHaveAnAccount": "Already have an account"
+  "Message_AlreadyHaveAnAccount": "Already have an account",
+  "Message_CategoryUpdated": "Category updated"
 }
